@@ -1,0 +1,36 @@
+﻿@page "/testreport"
+
+<XReport DataSource="CreateDataSource()" DataMember="Employees" Margins="XMargins.From(100, 100, 105, 75)" ViewMode=ViewMode.Preview>
+    <Bands>
+        <XBandReportHeader Name="ReportHeader1" Height=50 FlexStyle="FlexStyle1">
+            <XControlLabel Name="Label1" Text="Employees" Width="240" Style="Style1"></XControlLabel>
+        </XBandReportHeader>
+        <XBandDetail Name="Detail1" Height="30">
+            <XControlLabel Name="Label2" X="10" Expression="[FirstName]" Width="120"></XControlLabel>
+            <XControlLabel Name="Label3" Expression="[LastName]" X="125"></XControlLabel>
+        </XBandDetail>
+        <XBandBottomMargin Height="100">
+            <XControlPageInfo PageInfo="XPageInfo.DateTime" Width="120"></XControlPageInfo>
+            <XControlPageInfo X="325" FormatString="Page {0} of {1}"></XControlPageInfo>
+        </XBandBottomMargin>
+    </Bands>
+    <Styles>
+        <XStyle Name="Style1" TextAlignment="XTextAlignment.MiddleCenter" BackColor="XColor.From(109, 140, 89)" ForeColor="XColor.White">
+            <XFont Name="@XFontNames.Tahoma" Size="20.25f"></XFont>
+        </XStyle>
+        <XFlexStyle Name="FlexStyle1" Direction="FlexDirection.Row" Justify="FlexJustify.Start" Align="FlexAlign.Start">
+        </XFlexStyle>
+    </Styles>
+</XReport>
+
+@code {
+    object CreateDataSource() {
+        var query = SelectQueryFluentBuilder.AddTable("Employees")
+            .SelectAllColumns()
+            .Build("Employees");
+
+        var dataSource = new DevExpress.DataAccess.Sql.SqlDataSource("NWindConnectionString");
+        dataSource.Queries.Add(query);
+        return dataSource;
+    }
+}

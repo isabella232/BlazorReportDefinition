@@ -1,0 +1,23 @@
+﻿@page "/"
+
+<h1>DevExpress Reporting - Blazor Report Definition</h1>
+
+<p>
+    In this demo, we create a report definition solely in Razor markup and view the resulting report in the built-in Report Viewer.
+</p>
+<p>
+    The ability to create a report in markup allows us to create a report on all platforms, be it MAC or Linux, since development environments often support code completion.
+</p>
+<p>
+    The page contains a Blazor Report component that is a report with the layout defined in Razor markup language. When the page is prerendered on the server, the Blazor Report component (XReport) is transformed into an XtraReport instance in the Blazor render tree. Two render modes are available - default mode returns a report instance to the page, the Preview mode displays a report in the Report Viewer.
+</p>
+<p>
+    Markup tags are named after related bands and reporting controls, that is, the "X" prefix is added to the band type name, "XControl" prefix substitutes the "XR" prefix in the report control type name. The following markup creates a simple report:
+</p>
+
+<img src="Images/xreport.png" />
+
+<p>
+    We encourage you to try out the new report layout definition language and create your own reports in this demo application.
+</p>
+

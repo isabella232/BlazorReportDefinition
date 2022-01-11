@@ -1,0 +1,121 @@
+﻿@page "/tablereport"
+
+@using DevExpress.DataAccess.Sql
+@using DevExpress.Blazor.Reporting.Designer.Components;
+
+<link rel="stylesheet" href="_content/DevExpress.Blazor/dx-blazor.css">
+<link rel="stylesheet" href="_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.css">
+
+<XReport DataSource="CreateDataSource()" DataMember="OrderDetails" Margins="XMargins.From(72, 72, 72, 72)" ReportUnit="XReportUnit.Pixels" ViewMode="ViewMode.Preview">
+    <Bands>
+        <XBandPageHeader>
+            <XTable>
+                <XTableRow Height="32" Style="PhStyle1">
+                    <XTableCell Expression="'Details for Customer Order # ' + [OrderID]"></XTableCell>
+                </XTableRow>
+                <XTableRow Height="53">
+                    <XTableCell Width="333" Style="PhStyle2">
+                        <XControlPageInfo PageInfo="XPageInfo.DateTime"></XControlPageInfo>
+                    </XTableCell>
+                    <XTableCell Width="340" Style="PhStyle3">
+                        <XControlPageInfo PageInfo="XPageInfo.NumberOfTotal" FormatString="Page {0} of {1} pages"></XControlPageInfo>
+                    </XTableCell>
+                </XTableRow>
+                <XTableRow Height="30" Style="PhStyle4">
+                    <XTableCell Width="333" Text="PRODUCT/SUPPLIER" Style="PhStyle5"></XTableCell>
+                    <XTableCell Width="85" Text="UNIT PRICE"></XTableCell>
+                    <XTableCell Width="85" Text="QUANTITY"></XTableCell>
+                    <XTableCell Width="85" Text="DISCOUNT"></XTableCell>
+                    <XTableCell Width="85" Text="SUBTOTAL"></XTableCell>
+               </XTableRow>
+            </XTable>
+        </XBandPageHeader>
+        <XBandDetail Style="DtStyle1" OddStyle="DtStyle2" KeepTogether="true">
+            <XTable>
+                <XTableRow Height="35">
+                    <XTableCell Width="333" Expression="[ProductName]" Style="DtStyle3"></XTableCell>
+                    <XTableCell Width="85" Expression="[UnitPrice]" FormatString="{0:$#,##.00}" RowSpan="2"></XTableCell>
+                    <XTableCell Width="85" Expression="[Quantity]" RowSpan="2"></XTableCell>
+                    <XTableCell Width="85" Expression="[Discount]" FormatString="{0:0%}" RowSpan="2"></XTableCell>
+                    <XTableCell Width="85" Expression="[SubTotal]" FormatString="{0:$#,##.00}" RowSpan="2"></XTableCell>
+               </XTableRow>
+                <XTableRow Height="55">
+                    <XTableCell Width="333" Expression="[Supplier]" Style="DtStyle4"></XTableCell>
+                    <XTableCell Width="85"></XTableCell>
+                    <XTableCell Width="85"></XTableCell>
+                    <XTableCell Width="85"></XTableCell>
+                    <XTableCell Width="85"></XTableCell>
+                </XTableRow>
+            </XTable>
+        </XBandDetail>
+        <XBandReportFooter PrintAtBottom="true">
+            <XTable>
+                <XTableRow Height="30">
+                    <XTableCell Width="333" RowSpan="2">
+                        <XControlPictureBox ImageSizeMode="XImageSizeMode.Normal" ImageUrl="wwwroot\\images\\dxlogo.svg"></XControlPictureBox>
+                    </XTableCell>
+                    <XTableCell Width="340" Text="TOTAL ORDER COST" Style="RfStyle1">
+                    </XTableCell>
+                </XTableRow>
+                <XTableRow Height="48">
+                    <XTableCell Width="333">
+                    </XTableCell>
+                    <XTableCell Width="340" Expression="sumSum([SubTotal])" FormatString="{0:$0.00}" Style="RfStyle2">
+                    </XTableCell>
+                </XTableRow>
+            </XTable>
+        </XBandReportFooter>
+    </Bands>
+    <Styles>
+        <XStyle Name="PhStyle1" TextAlignment="XTextAlignment.MiddleLeft" BackColor="XColor.Transparent" ForeColor="XColor.Black">
+            <XFont Name="@XFontNames.SegoeUI" Size="18"></XFont>
+        </XStyle>
+        <XStyle Name="PhStyle2" TextAlignment="XTextAlignment.TopLeft" BackColor="XColor.Transparent" ForeColor="XColor.From(127, 127, 127)">
+            <XFont Name="@XFontNames.SegoeUI" Size="8.25f"></XFont>
+        </XStyle>
+        <XStyle Name="PhStyle3" Inherit="PhStyle2" TextAlignment="XTextAlignment.BottomRight">
+            <XPadding Bottom="5"></XPadding>
+        </XStyle>
+        <XStyle Name="PhStyle4" TextAlignment="XTextAlignment.MiddleRight" BackColor="XColor.From(127, 127, 127)" ForeColor="XColor.White">
+            <XFont Name="@XFontNames.Tahoma" Size="8.25f" Bold="true"></XFont>
+            <XPadding Right="15"></XPadding>
+        </XStyle>
+        <XStyle Name="PhStyle5" TextAlignment="XTextAlignment.MiddleLeft">
+            <XPadding Left="15"></XPadding>
+        </XStyle>
+        <XStyle Name="DtStyle1" TextAlignment="XTextAlignment.TopRight" BackColor="XColor.Transparent" ForeColor="XColor.Black">
+            <XFont Name="@XFontNames.SegoeUI" Size="9"></XFont>
+            <XPadding Right="15" Top="15"></XPadding>
+        </XStyle>
+        <XStyle Name="DtStyle2" BackColor="XColor.From(234, 245, 255)" Inherit="DtStyle1">
+        </XStyle>
+        <XStyle Name="DtStyle3" TextAlignment="XTextAlignment.TopLeft">
+            <XFont Name="@XFontNames.SegoeUI" Size="10" Bold="true"></XFont>
+            <XPadding Left="15" Top="15"></XPadding>
+        </XStyle>
+        <XStyle Name="DtStyle4" TextAlignment="XTextAlignment.TopLeft">
+            <XPadding Left="15"></XPadding>
+        </XStyle>
+        <XStyle Name="RfStyle1" TextAlignment="XTextAlignment.MiddleRight" ForeColor="XColor.From(127, 127, 127)">
+            <XFont Name="@XFontNames.SegoeUI" Size="10" Bold="true"></XFont>
+        </XStyle>
+        <XStyle Name="RfStyle2" TextAlignment="XTextAlignment.TopRight">
+            <XFont Name="@XFontNames.SegoeUI" Size="16"></XFont>
+        </XStyle>
+    </Styles>
+</XReport>
+
+@code {
+    object CreateDataSource() {
+        var query = SelectQueryFluentBuilder.AddTable("OrderDetailsExtended")
+            .SelectAllColumns()
+            .SelectExpression("ToDouble([OrderDetailsExtended].[Quantity] * [OrderDetailsExtended].[UnitPrice])", "SubTotal")
+            .Filter("[OrderDetailsExtended.OrderID] = 11077")
+            .SortBy("ExtendedPrice", System.ComponentModel.ListSortDirection.Descending)
+            .Build("OrderDetails");
+
+        var dataSource = new DevExpress.DataAccess.Sql.SqlDataSource("NWindConnectionString");
+        dataSource.Queries.Add(query);
+        return dataSource;
+    }
+}

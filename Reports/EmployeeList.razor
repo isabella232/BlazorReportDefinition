@@ -1,0 +1,80 @@
+﻿@page "/employeelistreport"
+
+@using DevExpress.DataAccess.Sql
+@using DevExpress.Blazor.Reporting.Designer.Components;
+
+<link rel="stylesheet" href="_content/DevExpress.Blazor/dx-blazor.css">
+<link rel="stylesheet" href="_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.css">
+
+<XReport DataSource="CreateDataSource()" DataMember="Employees" Margins="XMargins.From(100, 100, 105, 75)" ReportUnit="XReportUnit.HundredthsOfAnInch" ViewMode="ViewMode.Preview">
+    <Bands>
+        <XBandReportHeader Height="75">
+            <XControlLabel X="4" Y="0" Width="638" Height="50" Text="Employee List" Style="RhStyle1"></XControlLabel>
+        </XBandReportHeader>
+        <XBandDetail Height="174">
+            <XControlPictureBox X="4" Y="y" Width="179" Height="150" ImageSizeMode="XImageSizeMode.AutoSize" Expression="[Photo]" Style="DtStyle1"></XControlPictureBox>
+            <XControlLabel X="x1" Y="y" Width="width1" Height="height" Text="Name:" Style="DtStyle2"></XControlLabel>
+            <XControlLabel X="x2" Y="y" Width="width2" Height="height" Expression="[FirstName] + ' ' + [LastName]" Style="DtStyle3"></XControlLabel>
+            <XControlLabel X="x1" Y="@NextRow()" Width="width1" Height="height" Text="Position:" Style="DtStyle2"></XControlLabel>
+            <XControlLabel X="x2" Y="y" Width="width2" Height="height" Expression="[Title]" Style="DtStyle4"></XControlLabel>
+            <XControlLabel X="x1" Y="@NextRow()" Width="width1" Height="height" Text="Birth Date:" Style="DtStyle2"></XControlLabel>
+            <XControlLabel X="x2" Y="y" Width="width2" Height="height" Expression="[BirthDate]" FormatString="{0:D}" Style="DtStyle4"></XControlLabel>
+            <XTable X="x1" Y="@NextRow()" >
+                <XTableRow Height="height">
+                    <XTableCell Width="width1"Text="About" Style="DtStyle2"></XTableCell>
+                    <XTableCell Width="4"></XTableCell>
+                    <XTableCell Width="width2" Expression="[Notes]" Style="DtStyle3"></XTableCell>
+                </XTableRow>
+            </XTable>
+            <XControlLabel X="x1" Y="@NextRow()" Width="width1" Height="height" Text="Address:" Style="DtStyle2"></XControlLabel>
+            <XControlLabel X="x2" Y="y" Width="width2" Height="height" Expression="[Country] + ',' + [City] + ',' + [Address]" Style="DtStyle4"></XControlLabel>
+        </XBandDetail>
+        <XBandBottomMargin>
+            <XControlPictureBox X="249" Y="17" Width="200" ImageSizeMode="XImageSizeMode.Normal" ImageUrl="wwwroot\\images\\dxlogo.svg"></XControlPictureBox>
+            <XControlPageInfo  X="542" Y="4" PageInfo="XPageInfo.NumberOfTotal" FormatString="Page : {0 } / {1}" Style="BmStyle1"></XControlPageInfo>
+        </XBandBottomMargin>
+    </Bands>
+    <Styles>
+        <XStyle Name="RhStyle1" TextAlignment="XTextAlignment.MiddleCenter" BackColor="XColor.From(109, 140, 89)" ForeColor="XColor.White">
+            <XFont Name="@XFontNames.Tahoma" Size="20.25f"></XFont>
+        </XStyle>
+        <XStyle Name="DtStyle1" TextAlignment="XTextAlignment.TopRight" BackColor="XColor.From(240, 237, 218)">
+            <XPadding Left="7" Right="7" Top="7" Bottom="7"></XPadding>
+        </XStyle>
+        <XStyle Name="DtStyle2" TextAlignment="XTextAlignment.MiddleCenter" BackColor="XColor.From(109, 140, 89)" ForeColor="XColor.White">
+            <XFont Name="@XFontNames.Tahoma" Size="8.25f" Bold="true"></XFont>
+        </XStyle>
+        <XStyle Name="DtStyle3" TextAlignment="XTextAlignment.MiddleJustify" BackColor="XColor.From(240, 237, 218)">
+            <XFont Name="@XFontNames.Tahoma" Size="8.25f"></XFont>
+            <XPadding Left="9" Right="6" Top="4" Bottom="4"></XPadding>
+        </XStyle>
+        <XStyle Name="DtStyle4" Inherit="DtStyle3"  TextAlignment="XTextAlignment.MiddleLeft">
+        </XStyle>
+        <XStyle Name="BmStyle1" BackColor="XColor.Transparent">
+            <XFont Name="@XFontNames.TimesNewRoman" Size="9" Italic="true"></XFont>
+            <XPadding Left="9" Right="6" Top="4" Bottom="4"></XPadding>
+        </XStyle>
+    </Styles>
+    <Watermark>
+        <XWatermarkText Text="CONFIDENTIAL" ShowBehind="false">
+            <XFont Name="@XFontNames.Verdana" Size="54"></XFont>
+        </XWatermarkText>
+    </Watermark>
+</XReport>
+
+@code {
+    int y = 13, height = 25, x1 = 217, x2 = 321, width1 = 100, width2 = 320;
+    int NextRow() {
+        y += height + 4;
+        return y;
+    }
+    object CreateDataSource() {
+        var query = SelectQueryFluentBuilder.AddTable("Employees")
+            .SelectAllColumns()
+            .Build("Employees");
+
+        var dataSource = new DevExpress.DataAccess.Sql.SqlDataSource("NWindConnectionString");
+        dataSource.Queries.Add(query);
+        return dataSource;
+    }
+}
