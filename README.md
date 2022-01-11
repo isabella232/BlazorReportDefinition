@@ -40,7 +40,8 @@ To create a report, define it in the razor markup as follows:
 
 The report is bound to the Employees table of the Northwind database. The resulting page appears as follows:
 
-![](https://hackmd.devexpress.devx/uploads/upload_ae9953a74148c16b24e28664679f1c3a.png)
+![image](https://user-images.githubusercontent.com/27409929/148933203-9c8ffb31-0982-4d94-89fb-c06343a93162.png)
+
 
 Report layout in razor markup offers us a convenient report view that is easy to follow and is located on the same page as the component. You can take advantage of Intellisense and structured view.
 
