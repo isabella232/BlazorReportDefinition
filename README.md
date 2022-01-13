@@ -1,13 +1,13 @@
-# Blazor Report Component with Layout in Razor Markup
+# Blazor Reporting Component with Layout in Razor Markup
 
-## Idea
-As you may already know, a new idea comes when you look at things from a different point of view. As Blazor developers, we looked at our report layout definition files and noticed that Reporting for Blazor lacks a designer component that would fit seamlessly into the Blazor ecosystem. Our existing visual report designer is quite complex and somewhat unpractical to web development. Web development includes layout (html + css) and logic, and visual designs are not popular in this world. 
+## Introduction
+As you may already know, a new idea arises when you look at things from a different point of view. As Blazor developers, we reviewed our report layout definition files and noticed that Reporting for Blazor lacks a designer component that would fit seamlessly into the Blazor ecosystem. Our existing visual Report Designer is quite complex, while web development in its core includes layout (html + css) and logic, and visual designs are not popular in this world. 
 
-With the release of Blazor we get an integration of client and server technologies, allowing us to take advantage of the "layout + logic" concept. With this in mind, we came up with the idea that a non-visual designer would be a great replacement for a visual Blazor component.
+This leads to the following qustion: How do we apply Web development techniques to report layout creation?
 
-Furthermore the ability to create a report in markup allows us to create a report on all platforms, be it MAC or Linux, since development environments often support code completion.
+You can think of a Blazor report as a Blazor component with the layout defined in Razor markup. When the page is prerendered on the server, the Blazor Report component (XReport) is transformed into an XtraReport instance in the Blazor render tree. The component previews a report in the Report Viewer. Developers may prefer using hot reload functionality to design a report in markup instead of the visual Report Designer.
 
-The idea is simple at its core. Let's think of the report as a Blazor component with the layout defined in Razor markup language. When the page is prerendered on the server, the Blazor Report component (XReport) is transformed into an XtraReport instance in the Blazor render tree. We suggest three processing modes for the component - it can return a report instance to the page, preview a report in the Report Viewer, or display a "designer preview" for the report - a preview that does not build a document but visualizes the layout defined in markup. Hot reload functionality can make designing a report in markup even more appealing than working in the visual report designer.
+Furthermore the ability to create a report in markup allows us to create a report on all platforms, be it MAC or Linux.
 
 ## Implementation
 
@@ -43,11 +43,13 @@ The report is bound to the Employees table of the Northwind database. The result
 ![image](https://user-images.githubusercontent.com/27409929/148933203-9c8ffb31-0982-4d94-89fb-c06343a93162.png)
 
 
-Report layout in razor markup offers us a convenient report view that is easy to follow and is located on the same page as the component. You can take advantage of Intellisense and structured view.
+Report layout in razor markup generates a convenient report view that is easy to follow and is located on the same page as the component. The report view supports Intellisense and displays the report layout in a structured view.
 
-Markup tags are named after related bands and reporting controls, i.e. the "X" prefix is added to the band type name, "XControl" prefix substitutes the "XR" prefix in the report control type name. 
+Markup tags are named after related bands and reporting controls: the "X" prefix is added to the band type name and the "XControl" prefix replaces the "XR" prefix in the report control type name.
 
-The entire Report Designer functionality is quite extensive, and we do not attempt to cover it with the Razor markup because we do not want duplicate our xml layout format. We'll stick to the simplified version that contains only the most requested features, and if you need something specific, you can use the **Customize** method:
+Since Web developers have their own techniques for positioning elements, we offer the most popular types of positioning - **flex** and **absolute**. You can use block positioning for report elements within the scope of a report. This approach works well regardless of the browser type, because the position of the elements will be the same in any browser. 
+
+The entire Report Designer functionality is quite extensive, and we do not attempt to implement all the features with the Razor markup syntax because we do not want to duplicate our xml layout format. We'll stick to the simplified version that contains only the most requested features, and if you need something specific, you can use the **Customize** method:
 
 ```razor
 <XReport>
@@ -67,9 +69,9 @@ The entire Report Designer functionality is quite extensive, and we do not attem
 
 ```
 
-If you have a custom control, or if you wish to extend the control properties,  you can make a descendant and implement the desired parameters. The following code samples shows how to set the KeepTogether property in the markup.
+If you have a custom control, or if you wish to extend the control properties, you can make a descendant and implement the desired parameters. The following code samples show how to set the KeepTogether property in markup.
 
-Create a descendant:
+Create a `XControlLabel` class descendant:
 
 ```csharp
     public class XControlLabelEx : XControlLabel {
@@ -82,7 +84,7 @@ Create a descendant:
     }
 ```
 
-Use new property in razor markup:
+Use the new property in razor markup:
 
 ```razor
 <XReport>
@@ -94,21 +96,21 @@ Use new property in razor markup:
 </XReport>
 ```
 
-## Render Modes
 
-We suggest three render modes for the report layout component on the page. 
+## Prerequisites
 
-1. Razor markup is rendered and creates a XtraReport instance. 
+You should have the following installed in your system:
 
+- .NET 5.0
+- Visual Studio 2019 version 16.4+
+- DevExpress v21.4 DXperience Subscription
 
-2. Razor markup is rendered and displayed in the Report Viewer:
+## How to Run the Project
 
-
-3. Razor markup is rendered and displayed in the design preview that enables the developer to edit markup and observe the results on the page with hot reload. The mode works as a report designer.
-
+Download the project, open in Visual Studio and run. The required NuGet packages are automatically loaded from the local DevExpress package source and from the NuGet site.
 ## What's Next
 
-We can go towards html and css support. However, this solution is tied up with the browser type. The projected algorithm works as follows: we request computedStyles from the client and eventually position the component and apply the style based on the received data. With this approach we face a classic web development problem that the appearance depends on the browser.
+We encourage you to create a Razor page with your own report and share your experience in the [GitHub Discussions](https://github.com/e1em3ntoDX/BlazorReportDefinition/discussions) for this repository. 
 
 
 
