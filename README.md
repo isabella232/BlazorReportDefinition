@@ -11,7 +11,7 @@ Furthermore the ability to create a report in markup allows us to create a repor
 
 ## Implementation
 
-To create a report, define it in the razor markup as follows:
+To create a report, define it in the Razor markup as follows:
 
 ```razor
 @using DevExpress.Blazor.Reporting.Designer.Components
@@ -43,13 +43,13 @@ The report is bound to the Employees table of the Northwind database. The result
 ![image](https://user-images.githubusercontent.com/27409929/148933203-9c8ffb31-0982-4d94-89fb-c06343a93162.png)
 
 
-Report layout in razor markup generates a convenient report view that is easy to follow and is located on the same page as the component. The report view supports Intellisense and displays the report layout in a structured view.
+A report layout in Razor markup generates a convenient report view that is easy to follow and is located on the same page as the component. The report view supports Intellisense and displays the report layout in a structured view.
 
 Markup tags are named after related bands and reporting controls: the "X" prefix is added to the band type name and the "XControl" prefix replaces the "XR" prefix in the report control type name.
 
-Since Web developers have their own techniques for positioning elements, we offer the most popular types of positioning - **flex** and **absolute**. You can use block positioning for report elements within the scope of a report. This approach works well regardless of the browser type, because the position of the elements will be the same in any browser. 
+Since Web developers have their own techniques for positioning elements, we offer the most popular types of positioning - **flex** and **absolute**. You can use block positioning for report elements within the scope of a report. This technique works well regardless of the browser type, because the position of the elements will be the same in any browser. 
 
-The entire Report Designer functionality is quite extensive, and we do not attempt to implement all the features with the Razor markup syntax because we do not want to duplicate our xml layout format. We'll stick to the simplified version that contains only the most requested features, and if you need something specific, you can use the **Customize** method:
+The entire Report Designer functionality is quite extensive, and we do not attempt to implement all the features with the Razor markup syntax because we do not want to duplicate XML layout format. We'll stick to the simplified version that contains only the most requested features, and if you need something specific, you can use the **Customize** method:
 
 ```razor
 <XReport>
@@ -84,7 +84,7 @@ Create a `XControlLabel` class descendant:
     }
 ```
 
-Use the new property in razor markup:
+Use the new property in Razor markup:
 
 ```razor
 <XReport>
