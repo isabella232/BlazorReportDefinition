@@ -1,15 +1,17 @@
 # Blazor Reporting Component with Layout in Razor Markup
 
 ## Introduction
-As you may already know, a new idea arises when you look at things from a different point of view. As Blazor developers, we reviewed our report layout definition files and noticed that Reporting for Blazor lacks a designer component that would fit seamlessly into the Blazor ecosystem. Our existing visual Report Designer is quite complex, while web development in its core includes layout (html + css) and logic, and visual designs are not popular in this world. 
+As you may already know, a new idea arises when you look at things from a different point of view. As Blazor developers, we reviewed our report layout definition files and noticed that Reporting for Blazor lacks a designer component that would fit seamlessly into the Blazor ecosystem. Our existing DevExpress Visual Report Designer might be a bit complex, while web development in its core includes layout (html + css) and logic, and visual designers are not that popular in this world. 
 
-This leads to the following qustion: How do we apply Web development techniques to report layout creation?
+This leads to the following question: **How do we apply Web development techniques to report layout creation?**
 
-You can think of a Blazor report as a Blazor component with the layout defined in Razor markup. When the page is prerendered on the server, the Blazor Report component (XReport) is transformed into an XtraReport instance in the Blazor render tree. The component previews a report in the Report Viewer. Developers may prefer using hot reload functionality to design a report in markup instead of the visual Report Designer.
+You can think of a Blazor report as a Blazor component with the layout defined in Razor markup. When the page is prerendered on the server, the Blazor Report component (XReport) is transformed into an XtraReport instance in the Blazor render tree. The component previews a report in the Report Viewer. Developers may prefer using hot reload functionality to design a report in markup instead of the DevExpress Visual Studio Report Designer.
 
-Furthermore the ability to create a report in markup allows us to create a report on all platforms, be it MAC or Linux.
+Here's a sample diagram illustrating the workflow:
 
-## Implementation
+Furthermore the ability to create a report in markup allows us to create a report on all platforms, be it MacOS or Linux.
+
+## How to 
 
 To create a report, define it in the Razor markup as follows:
 
@@ -49,7 +51,7 @@ Markup tags are named after related bands and reporting controls: the "X" prefix
 
 Since Web developers have their own techniques for positioning elements, we offer the most popular types of positioning - **flex** and **absolute**. You can use block positioning for report elements within the scope of a report. This technique works well regardless of the browser type, because the position of the elements will be the same in any browser. 
 
-The entire Report Designer functionality is quite extensive, and we do not attempt to implement all the features with the Razor markup syntax because we do not want to duplicate XML layout format. We'll stick to the simplified version that contains only the most requested features, and if you need something specific, you can use the **Customize** method:
+The entire Visual Studio Report Designer functionality is quite extensive, and we do not attempt to implement all the features with the Razor markup syntax because we do not want to duplicate XML layout format. We'll stick to the simplified version that contains only the most requested features, and if you need something specific, you can use the **Customize** method:
 
 ```razor
 <XReport>
@@ -103,14 +105,17 @@ You should have the following installed in your system:
 
 - .NET 5.0
 - Visual Studio 2019 version 16.4+
-- DevExpress v21.4 DXperience Subscription
+- DevExpress DXperience Subscription v21.2.4 
 
 ## How to Run the Project
 
-Download the project, open in Visual Studio and run. The required NuGet packages are automatically loaded from the local DevExpress package source and from the NuGet site.
-## What's Next
+Download the project, open in Visual Studio and run. In the navigation pane you'll find two sample reports:  [EmployeeList.razor](https://github.com/e1em3ntoDX/BlazorReportDefinition/blob/master/Reports/EmployeeList.razor) and [TableReport.razor](https://github.com/e1em3ntoDX/BlazorReportDefinition/blob/master/Reports/TableReport.razor). 
 
-We encourage you to create a Razor page with your own report and share your experience in the [GitHub Discussions](https://github.com/e1em3ntoDX/BlazorReportDefinition/discussions) for this repository. 
+Note that the required NuGet packages are automatically loaded from the local DevExpress package source and from the NuGet.org.
+
+## How to Submit Feedback
+
+We encourage you to create a Razor page with your own report to check the capabilities of this proof of concept and share your experience in the [Feedback Discussion](https://github.com/e1em3ntoDX/BlazorReportDefinition/discussions/6) for this repository. 
 
 
 
