@@ -51,7 +51,7 @@ A report layout in Razor markup generates a convenient report view that is easy 
 
 Markup tags are named after related bands and reporting controls: the "X" prefix is added to the band type name and the "XControl" prefix replaces the "XR" prefix in the report control type name.
 
-Since Web developers have their own techniques for positioning elements, we offer the most popular types of positioning - **flex** and **absolute**. You can use block positioning for report elements within the scope of a report. This technique works well regardless of the browser type, because the position of the elements will be the same in any browser. 
+Since Web developers have their own techniques for positioning elements, we offer the most popular types of positioning - **flex** and **absolute**. You can use block positioning for report elements within the scope of a report. This technique works well regardless of the browser type, because the position of the elements will be the same in any browser. See the following report implementation for an example: [Test Report](https://github.com/e1em3ntoDX/BlazorReportDefinition/blob/master/Reports/TestReport.razor).
 
 The entire Visual Studio Report Designer functionality is quite extensive, and we do not attempt to implement all the features with the Razor markup syntax because we do not want to duplicate XML layout format. We'll stick to the simplified version that contains only the most requested features, and if you need something specific, you can use the **Customize** method:
 
