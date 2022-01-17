@@ -1,10 +1,12 @@
-﻿using DevExpress.AspNetCore.Reporting.WebDocumentViewer;
-using DevExpress.AspNetCore.Reporting.WebDocumentViewer.Native.Services;
+﻿using DevExpress.Blazor.Reporting.Controllers;
+using DevExpress.Blazor.Reporting.Internal.Services;
 
 namespace BlazorReportDefinition.Controllers
 {
-    public class CustomWebDocumentViewerController : WebDocumentViewerController {
-        public CustomWebDocumentViewerController(IWebDocumentViewerMvcControllerService controllerService) : base(controllerService) {
+    public class DownloadExportResultController : DownloadExportResultControllerBase
+    {
+        public DownloadExportResultController(ExportResultStorage exportResultStorage) :
+            base(exportResultStorage) {
         }
     }
 }
