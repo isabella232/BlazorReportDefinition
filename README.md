@@ -7,7 +7,7 @@ This leads to the following question: **How do we apply Web development techniqu
 
 Consider the following sample diagram. An item by the number one illustrates the way demonstrated in this sample, whereas the number two describes a regular report creation approach with the help of Visual Studio Report Designer:
 
-![MicrosoftTeams-image (79)](https://user-images.githubusercontent.com/27409929/149539967-87170d98-80e6-4766-97d4-f7759318c8fc.png)
+![image](https://user-images.githubusercontent.com/27409929/149805251-af86960b-0376-49f9-8872-94abd0754259.png)
 
 You can think of a Blazor report as a Blazor component with the layout defined in Razor markup. When the page is prerendered on the server, the Blazor Report component (XReport) is transformed into an XtraReport instance which, in turn, is wrapped into the [DevExpress Blazor Report Viewer component](https://docs.devexpress.com/XtraReports/DevExpress.Blazor.Reporting.DxReportViewer) automatically, and added to the Blazor render tree. Developers may prefer using hot reload functionality to design a report in markup instead of the DevExpress Visual Studio Report Designer.
 
