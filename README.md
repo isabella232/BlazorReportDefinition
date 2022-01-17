@@ -11,7 +11,7 @@ Consider the following sample diagram. An item by the number one illustrates the
 
 You can think of a Blazor report as a Blazor component with the layout defined in Razor markup. When the page is prerendered on the server, the Blazor Report component (XReport) is transformed into an XtraReport instance which, in turn, is wrapped into the [DevExpress Blazor Report Viewer component](https://docs.devexpress.com/XtraReports/DevExpress.Blazor.Reporting.DxReportViewer) automatically, and added to the Blazor render tree. Developers may prefer using hot reload functionality to design a report in markup instead of the DevExpress Visual Studio Report Designer.
 
-Furthermore the ability to create a report in markup allows us to create a report on all platforms, be it MacOS or Linux.
+Furthermore the ability to create a report in markup allows us to create a report on all platforms, be it macOS or GNU/Linux.
 
 ## How to 
 
