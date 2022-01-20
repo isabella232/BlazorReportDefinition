@@ -5,7 +5,7 @@ As you may already know, a new idea arises when you look at things from a differ
 
 This leads to the following question: **How do we apply Web development techniques to report layout creation?**
 
-Consider the following sample diagram. An item by the number one illustrates the way demonstrated in this sample, whereas the number two describes a regular report creation approach with the help of Visual Studio Report Designer:
+Consider the following sample diagram. It shows two ways to create a report. The first way is the technique demonstrated in this project, the second way is a regular report creation technique that uses Visual Studio Report Designer:
 
 ![image](https://user-images.githubusercontent.com/27409929/149805251-af86960b-0376-49f9-8872-94abd0754259.png)
 
@@ -13,7 +13,7 @@ You can think of a Blazor report as a Blazor component with the layout defined i
 
 Furthermore the ability to create a report in markup allows us to create a report on all platforms, be it macOS or GNU/Linux.
 
-## How to 
+## Implementation
 
 To create a report, define it in the Razor markup as follows:
 
